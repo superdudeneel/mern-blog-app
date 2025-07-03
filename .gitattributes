@@ -1,0 +1,25 @@
+# Set default behavior to automatically normalize line endings
+* text=auto
+
+# Ensure JavaScript and JSX files use LF
+*.js text eol=lf
+*.jsx text eol=lf
+
+# Ensure CSS and HTML files use LF
+*.css text eol=lf
+*.html text eol=lf
+
+# Images: treat as binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.svg binary
+
+# Node modules (if committed) as binary
+node_modules/** binary
+
+# Markdown and config files use LF
+*.md text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
