@@ -111,6 +111,9 @@ app.get('/api/checkauth', (req, res)=>{
 })
 
 app.get('/api/getuserblogs', async (req, res)=>{
+    if(!req.session.user){
+        return res.json({success: false})
+    }
     const user = await User.findById(req.session.user.id);
 
     const blogs = await Blog.find({userId: user._id});
@@ -155,6 +158,15 @@ app.get('/api/blog/:id', async (req, res)=>{
     }
     return res.json({success: true, blog: blog});
     
+})
+
+app.get('/api/logout', async (req, res)=>{
+    req.session.destroy((err)=>{
+        if(err){
+            return res.json({success: false})
+        }
+        return res.json({success: true, message: 'Logged Out!!'})
+    })
 })
 
 const myserver = http.createServer(app);

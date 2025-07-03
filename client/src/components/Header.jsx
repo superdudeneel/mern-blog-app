@@ -2,6 +2,8 @@ import React from 'react'
 import {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {User} from 'lucide-react';
+import Swal from 'sweetalert2';
+
 
 function Header() {
     const [isloggedin, setisloggedin] = useState(false);
@@ -17,6 +19,25 @@ function Header() {
             setisloggedin(true);
             setuser(result.user);
 
+        }
+    }
+    const handlelogout = async ()=>{
+        const response = await fetch('http://localhost:5400/api/logout', {
+            method :'GET',
+            credentials: 'include',
+        })
+        const result = await response.json();
+        if(result.success){
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: result.message,
+                showConfirmButton: true,
+                timer: 1200,
+                confirmButtonText: 'Ok',
+                showCloseButton: true,
+            })
+            setisloggedin(false);
         }
     }
     useEffect(()=>{
@@ -54,6 +75,7 @@ function Header() {
                             <User className = 'text-white'/>
                         </div>
                         <p>{user.name}</p>
+                        <button onClick = {handlelogout} className = 'bg-blue-600 hover:bg-blue-700 cursor-pointer  text-white px-2 py-1 rounded-md'>Logout</button>
                     </div>
                 </div>
             </nav>
