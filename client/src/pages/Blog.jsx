@@ -39,7 +39,11 @@ function Blog() {
           <h1 className="text-4xl font-bold text-gray-800 mb-4">By {blog.author}</h1>
           <p className = 'text-gray-600 mb-2'>{user.email}</p>
           {blog.date && (
-            <p className="text-sm text-gray-500 mb-6">{new Date(blog.date).toLocaleDateString()}</p>
+            <p className=" bg-indigo-700 w-30 px-4 py-3 rounded-md text-sm text-gray-50 mb-5">{new Date(blog.date).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: '2-digit',
+                    year: 'numeric',
+                    })}</p>
           )}
 
           <div className="text-lg text-gray-700 leading-relaxed whitespace-pre-line">
