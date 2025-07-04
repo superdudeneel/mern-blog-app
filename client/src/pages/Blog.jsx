@@ -8,6 +8,7 @@ function Blog() {
   let params = useParams();
   const id = params.id;
   const [blog, setblog] = useState({})
+  const [user, setuser] = useState({})
   const loadblog = async ()=>{
       const response = await fetch(`http://localhost:5400/api/blog/${id}`, {
         method: 'GET',
@@ -16,7 +17,7 @@ function Blog() {
       const result = await response.json();
       if(result.success){
         setblog(result.blog);
-
+        setuser(result.user);
       }
 
   }
@@ -36,6 +37,7 @@ function Blog() {
         <div className="p-5 right-10">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">{blog.title}</h1>
           <h1 className="text-4xl font-bold text-gray-800 mb-4">By {blog.author}</h1>
+          <p className = 'text-gray-600 mb-2'>{user.email}</p>
           {blog.date && (
             <p className="text-sm text-gray-500 mb-6">{new Date(blog.date).toLocaleDateString()}</p>
           )}

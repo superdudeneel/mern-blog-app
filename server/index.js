@@ -153,10 +153,12 @@ app.get('/api/getblogs', async (req, res)=>{
 app.get('/api/blog/:id', async (req, res)=>{
     const {id} = req.params;
     const blog  = await Blog.findById(id);
+    const user  = await User.findById(blog.userId);
+
     if(!blog){
         return res.json({success: false, message: 'No blog found'});
     }
-    return res.json({success: true, blog: blog});
+    return res.json({success: true, blog: blog, user: user});
     
 })
 
